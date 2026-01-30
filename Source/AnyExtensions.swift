@@ -24,6 +24,13 @@
 protocol AnyExtensions {}
 
 extension AnyExtensions {
+    
+    public func validate(value: Any) -> Bool {
+        guard let _ = value as? Self else {
+            return false
+        }
+        return true
+    }
 
     public static func isValueTypeOrSubtype(_ value: Any) -> Bool {
         return value is Self

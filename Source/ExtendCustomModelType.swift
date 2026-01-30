@@ -65,7 +65,7 @@ fileprivate func convertValue(rawValue: Any, property: PropertyInfo, mapper: Hel
 }
 
 fileprivate func assignProperty(convertedValue: Any, instance: _ExtendCustomModelType, property: PropertyInfo) {
-    if property.bridged {
+    if property.bridged, extensions(of: property.type).validate(value: convertedValue) {
         (instance as! NSObject).setValue(convertedValue, forKey: property.key)
     } else {
         extensions(of: property.type).write(convertedValue, to: property.address)
